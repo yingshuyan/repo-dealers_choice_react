@@ -1,5 +1,6 @@
 const db = require("./db");
-const { STRING } = require("sequelize").DataTypes;
+const Sequelize = require("sequelize");
+const { STRING } = Sequelize.DataTypes;
 
 const Book = db.define("book", {
   name: {
@@ -9,6 +10,9 @@ const Book = db.define("book", {
   bookUrl: {
     type: STRING,
     allowNull: false,
+  },
+  description: {
+    type: Sequelize.TEXT("long"),
   },
 });
 

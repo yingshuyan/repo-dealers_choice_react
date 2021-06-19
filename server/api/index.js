@@ -11,6 +11,20 @@ router.get("/authors", async (req, res, next) => {
   }
 });
 
+router.get("/authors/:id", async (req, res, next) => {
+  try {
+    res.send(
+      await Book.findAll({
+        where: {
+          authorId: req.params.id,
+        },
+      })
+    );
+  } catch (er) {
+    next(er);
+  }
+});
+
 router.get("/books", async (req, res, next) => {
   try {
     res.send(

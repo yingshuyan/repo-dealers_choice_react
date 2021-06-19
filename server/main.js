@@ -1,4 +1,3 @@
-const express = require("express");
 const app = require("./index");
 
 const port = 3000;
