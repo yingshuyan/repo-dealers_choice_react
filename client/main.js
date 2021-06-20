@@ -12,6 +12,12 @@ class Main extends React.Component {
       bookListByAuthor: [],
     };
     this.bookListByAuthor = this.bookListByAuthor.bind(this);
+    this.deleteBook = this.deleteBook.bind(this);
+    this.reset = this.reset.bind(this);
+  }
+
+  reset() {
+    this.setState({ bookListByAuthor: [] });
   }
 
   async componentDidMount() {
@@ -26,6 +32,14 @@ class Main extends React.Component {
     this.setState({ bookListByAuthor: bookList });
   }
 
+  async deleteBook(id) {
+    const response = await axios.delete(`api/books/${id}`);
+    const renewedBookList = this.state.bookListByAuthor.filter(
+      (ele) => ele.id !== id
+    );
+    this.setState({ bookListByAuthor: renewedBookList });
+  }
+
   render() {
     return (
       <div>
@@ -35,9 +49,14 @@ class Main extends React.Component {
             onClick={this.bookListByAuthor}
           />
         ) : (
-          <Books bookList={this.state.bookListByAuthor} />
+          <Books
+            deleteBook={this.deleteBook}
+            bookList={this.state.bookListByAuthor}
+          />
         )}
-        <Sidebar />
+        {this.state.bookListByAuthor[1] && (
+          <Sidebar backToAuthor={this.reset} />
+        )}
       </div>
     );
   }

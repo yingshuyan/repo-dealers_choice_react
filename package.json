@@ -20,9 +20,8 @@
     "axios": "^0.21.1"
   },
   "scripts": {
-    "start": "npm run start-dev & npm run build-dev & npm run sync & npm run seed",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "sync": "node ./server/db/index.js",
+    "start": "npm run seed & npm run start-dev & npm run build-dev",
     "seed": "node ./bin/seed.js",
     "start-dev": "nodemon ./server/main.js",
     "build-dev": "webpack --watch"

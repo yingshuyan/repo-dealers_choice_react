@@ -4,13 +4,20 @@ const Books = (props) => {
   //need to change it to table
   return (
     <div>
-      Book List
       <ul>
+        <h2>Book List</h2>
         {props.bookList.map((book) => (
           <li key={book.id}>
-            <div>Book name:{book.name}</div>
+            <button
+              onClick={() => {
+                props.deleteBook(book.id);
+              }}
+            >
+              Delete book of "{book.name}"{" "}
+            </button>
+            <div>{book.name}</div>
             <div>Wiki Link:{book.bookUrl}</div>
-            Book description
+            <div>Book description</div>
             <p>{book.description}</p>
           </li>
         ))}

@@ -37,6 +37,16 @@ router.get("/books", async (req, res, next) => {
   }
 });
 
+router.delete("/books/:id", async (req, res, next) => {
+  try {
+    const bookToDelete = await Book.findByPk(req.params.id);
+    await bookToDelete.destroy();
+    res.sendStatus(200);
+  } catch (er) {
+    next(er);
+  }
+});
+
 router.get("/readers", async (req, res, next) => {
   try {
     res.send(
